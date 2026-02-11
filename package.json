@@ -1,0 +1,30 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.11.3",
+    "mysql2": "^3.17.0",
+    "nuxt": "^4.3.1",
+    "pg-hstore": "^2.3.4",
+    "pinia": "^3.0.4",
+    "sequelize": "^6.37.7",
+    "vue": "^3.5.28",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^1.15.1",
+    "eslint": "^9.39.2",
+    "eslint-import-resolver-node": "^0.3.9",
+    "eslint-plugin-sonarjs": "^3.0.6",
+    "typescript": "^5.9.3"
+  }
+}
