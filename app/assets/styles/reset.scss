@@ -1,0 +1,36 @@
+h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, button {
+  padding: 0;
+  margin: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  font-size: inherit;
+}
+i {
+  font-style: normal;
+}
+ul, ol {
+  list-style-type: none;
+}
+img {
+  border: none;
+  vertical-align: top;
+}
+body {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+input, textarea, select {
+  font-family: inherit;
+}
+address {
+  font-style: normal;
+  display: inline;
+}
+
+* {
+  box-sizing: border-box;
+}

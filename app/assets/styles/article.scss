@@ -1,0 +1,102 @@
+// 文章标题
+.g-article-title {
+  font-family: 'PingHei', 'Microsoft JhengHei', 'Microsoft YaHei', STHeiti, SimHei;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+// 编辑器中的文章内容
+body.g-article-content { margin: 1em; }
+
+// 文章内容
+.g-article-content {
+  line-height: 1.7;
+  font-size: 16px;
+  text-align: justify;
+  word-break: break-all; 
+  word-wrap: break-word;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    font-family: 'PingHei', 'Microsoft JhengHei', 'Microsoft YaHei', STHeiti, SimHei;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-top: 32px;
+  }
+  h2 {
+    margin-top: 28px;
+    font-size: 22px;
+  }
+  h3 {
+    margin-top: 24px;
+    font-size: 20px;
+  }
+  h4 {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  h5 {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  h6 {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  p {
+    margin: 0.8em 0;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+
+  ul,
+  ol {
+    margin: 0 0 0 2em;
+    padding: 0;
+  }
+
+  ul { list-style-type: disc; }
+  ol { list-style-type: decimal; }
+
+  code {
+    display: block;
+    padding: 0.8em;
+    border-radius: 3px;
+    margin: 0 1em;
+    background-color: #f6f6f6;
+    font-family: Consolas, Courier, monospace;
+  }
+  
+  blockquote {
+    padding: 0.5em;
+    border-left: 5px solid #ccc;
+    margin: 0.2em 1em;
+    font-family: Georgia, Times, 'Times New Roman', serif;
+  }
+  
+  table {
+    width: 60%;
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+  th,
+  td {
+    border: 1px solid;
+    padding: 2px 4px;
+  }
+
+  img {
+    max-width: 90%;
+    margin: 0.5rem 0;
+    border: none;
+  }
+}

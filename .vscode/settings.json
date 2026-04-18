@@ -1,3 +1,19 @@
 {
-  "eslint.useFlatConfig": true
+  // 启用扁平化配置支持
+  "eslint.useFlatConfig": true,
+  // 保存时自动执行的所有代码操作
+  "editor.codeActionsOnSave": {
+    // 告诉 VS Code 在保存时运行 ESLint 的自动修复命令
+    "source.fixAll.eslint": "explicit"
+  },
+  // 可选：也可以开启编辑器的整体格式化开关
+  "editor.formatOnSave": true,
+  // 建议将 ESLint 设置为 Vue 和 JavaScript 等文件的默认格式化工具
+  // 这样可以避免与 Prettier 等其他格式化工具冲突 [citation:4]
+  "[javascript][typescript][vue]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
 }

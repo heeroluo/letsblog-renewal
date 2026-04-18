@@ -1,17 +1,25 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
-  devtools: { enabled: true },
-
-  devServer: {
-    port: 3030
+  modules: [
+    '@pinia/nuxt',
+    '@nuxt/eslint',
+  ],
+  devtools: {
+    enabled: true,
   },
-
-  modules: ['@pinia/nuxt', '@nuxt/eslint'],
-
+  css: [
+    '@/assets/styles/reset.scss',
+    '@/assets/styles/global.scss',
+    '@/assets/styles/iconfont/iconfont.css',
+    '@/assets/styles/article.scss',
+  ],
+  devServer: {
+    port: 3030,
+  },
+  compatibilityDate: '2025-07-15',
   eslint: {
     config: {
-      stylistic: true
-    }
-  }
+      stylistic: true,
+    },
+  },
 });

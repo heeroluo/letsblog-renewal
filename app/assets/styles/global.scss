@@ -1,0 +1,121 @@
+html {
+  background-color: #f8f8f8;
+}
+body {
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Microsoft YaHei, Arial, sans-serif;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+// .g-boundary {
+//   max-width: 1606px;
+//   width: 100%;
+//   padding-left: 96px;
+//   padding-right: 96px;
+//   margin: 0 auto;
+
+//   @media screen and (max-width: 1080px) {
+//     padding-left: 25px;
+//     padding-right: 25px;
+//   }
+// }
+
+.g-clearfix:after {
+  display: block;
+  overflow: hidden;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+  content: '.';
+}
+
+.g-flex-v-center {
+  display: flex;
+  align-items: center;
+}
+
+.g-singleline {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// .container {
+//   padding: 30px 0;
+//   background: #f8f8f8;
+// }
+
+// .main,
+// .sidebar,
+// .boundary { box-sizing: border-box; }
+
+.g-container {
+  padding: 30px 0;
+  background: #f8f8f8;
+}
+
+/* 限定左右间距 */
+.g-boundary {
+  margin: 0 40px;
+}
+@media (min-width: 1441px) {
+  .g-boundary {
+    width: 1280px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+@media (min-width: 960px) {
+  .g-container__boundary {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+@media (max-width: 959px) {
+  .g-boundary {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+}
+@media (max-width: 767px) {
+  .g-boundary {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+
+/* 侧栏模块 */
+// .sidebar__section { margin-top: 30px; }
+// .sidebar__section:first-child { margin-top: 0; }
+// .sidebar__section__title {
+//   margin-bottom: 10px;
+//   font-size: 16px;
+//   font-weight: bold;
+//   line-height: 28px;
+// }
+
+// .sidebar-article-list li {
+//   margin-top: 0.6em;
+//   padding-bottom: 0.6em;
+//   border-bottom: 1px dotted #ccc;
+//   line-height: 1.5;
+// }
+// .sidebar-article-list li:first-child { margin-top: 0; }
+// .sidebar-link-list { line-height: 1.5; }
+// .sidebar-link-list dt { margin-top: 0.7em; }
+// .sidebar-link-list dt:first-child { margin-top: 0; }
+// .sidebar-link-list dd { color: #999; font-size: 12px; }
+
+
+// @media (min-width: 960px) {
+//   .main {
+//     float: left;
+//     width: 70%;
+//   }
+//   .sidebar {
+//     float: right;
+//     width: 30%;
+//     padding-left: 50px;
+//   }
+// }
