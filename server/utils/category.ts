@@ -1,4 +1,4 @@
-import { findOne } from '#server/repositories/category.repo';
+import { findOne } from '#server/services/category';
 import { ErrorCode } from '#shared/utils/app-error';
 import type { CategoryAttrs } from '../models/category.model';
 

@@ -1,6 +1,6 @@
 import { ErrorCode } from '#shared/utils/app-error';
 import { findCategoryAndCheckPermission } from '#server/utils/category';
-import { findOne } from '#server/repositories/article.repo';
+import { findOne } from '#server/services/article';
 
 export default defineEventHandler(async (event) => {
   const params = getQuery(event);

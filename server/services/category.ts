@@ -11,10 +11,13 @@ import {
   create as createRecord,
   update as updateRecord,
   findAll as findAllRecords,
-  findOne as findOneRecord,
   destroy as destroyRecord,
 } from '#server/repositories/category.repo';
-import type { CategoryCreationAttrs } from '#server/models/category.model';
+import type { CategoryAttrs, CategoryCreationAttrs } from '#server/models/category.model';
+import { MemoryCache } from '#server/utils/memory-cache';
+
+// 缓存所有分类
+let cache: MemoryCache<CategoryAttrs[]>;
 
 /**
  * 创建分类。
@@ -23,7 +26,11 @@ import type { CategoryCreationAttrs } from '#server/models/category.model';
  */
 export async function create(data: CategoryCreationAttrs) {
   validateAndThrow(() => validate(data), ErrorCode.BadRequest);
-  return createRecord(data);
+  const result = await createRecord(data);
+  if (cache) {
+    await cache.clear();
+  }
+  return result;
 }
 
 /**
@@ -52,7 +59,12 @@ export async function destroy(id: number) {
  * @returns 所有分类。
  */
 export async function findAll() {
-  return findAllRecords();
+  if (!cache) {
+    cache = new MemoryCache('category:all', () => {
+      return findAllRecords();
+    });
+  }
+  return cache.get();
 }
 
 /**
@@ -62,5 +74,14 @@ export async function findAll() {
  */
 export async function findOne(id: number) {
   validateIdAndThrow(id, INVALID_ID_MSG);
-  return findOneRecord(id);
+  const categoryList = await findAll();
+  if (categoryList) {
+    for (let i = categoryList.length - 1; i >= 0; i--) {
+      const item = categoryList[i];
+      if (item?.categoryId === id) {
+        return item;
+      }
+    }
+  }
+  return null;
 }

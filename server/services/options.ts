@@ -4,14 +4,24 @@ import { ErrorCode } from '#shared/utils/app-error';
 import {
   findOne as findOneOptionsRecord,
   update as updateOptionsRecord,
-  type OptionsAttrs,
 } from '#server/repositories/options.repo';
+import type { OptionsAttrs } from '#server/models/options.model';
+import { MemoryCache } from '#server/utils/memory-cache';
+
+// 缓存站点设置
+let cache: MemoryCache<OptionsAttrs>;
 
 /**
  * 查询唯一的站点设置。
  */
 export async function findOne() {
-  return findOneOptionsRecord();
+  if (!cache) {
+    cache = new MemoryCache('options', () => {
+      return findOneOptionsRecord();
+    });
+    await cache.init();
+  }
+  return cache.get();
 }
 
 /**
@@ -20,5 +30,8 @@ export async function findOne() {
  */
 export async function update(data: OptionsAttrs) {
   validateAndThrow(() => validate(data), ErrorCode.BadRequest);
-  return updateOptionsRecord(data);
+  await updateOptionsRecord(data);
+  if (cache) {
+    await cache.clear();
+  }
 }

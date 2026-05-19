@@ -7,7 +7,7 @@
     "source.fixAll.eslint": "explicit"
   },
   // 可选：也可以开启编辑器的整体格式化开关
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   // 建议将 ESLint 设置为 Vue 和 JavaScript 等文件的默认格式化工具
   // 这样可以避免与 Prettier 等其他格式化工具冲突 [citation:4]
   "[javascript][typescript][vue]": {

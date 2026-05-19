@@ -15,10 +15,11 @@ import {
   update as updateRecord,
   findOne as findOneRecord,
   findAll as findAllRecord,
-  type ArticleCreationAttrs,
   type ArticleQueryParams,
 } from '#server/repositories/article.repo';
-import type { UserAttrs } from '#server/repositories/user.repo';
+import type { ArticleAttrs, ArticleCreationAttrs } from '#server/models/article.model';
+import type { UserAttrs } from '#server/models/user.model';
+import { MemoryCache } from '#server/utils/memory-cache';
 
 export const DEFAULT_WEIGHT = 60;
 
@@ -93,4 +94,42 @@ export async function findAll(
 ) {
   validateAndThrow(() => validateQueryParams(params), ErrorCode.BadRequest);
   return findAllRecord(pageSize, page, params);
+}
+
+// 缓存首页数据
+let homepageData: MemoryCache<DataList<ArticleAttrs>>;
+
+/**
+ * 获取首页文章数据。
+ * @returns 首页文章数据。
+ */
+export async function findHomepageList() {
+  if (!homepageData) {
+    homepageData = new MemoryCache('article:homepage', () => {
+      return findAllRecord(10, 1, {
+        minWeight: 1,
+        state: 1,
+      });
+    });
+  }
+  return homepageData.get();
+}
+
+// 缓存推荐数据
+let recommendedData: MemoryCache<DataList<ArticleAttrs>>;
+
+/**
+ * 获取推荐文章（最多 20 篇）。
+ * @returns 推荐文章。
+ */
+export async function findRecommendedList() {
+  if (!recommendedData) {
+    recommendedData = new MemoryCache('article:recommended', () => {
+      return findAllRecord(20, 1, {
+        minWeight: 200,
+        state: 1,
+      });
+    });
+  }
+  return recommendedData.get();
 }

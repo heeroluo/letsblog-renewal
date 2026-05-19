@@ -6,6 +6,14 @@ body {
   font-size: 14px;
   background-color: #fff;
 }
+a {
+  color: #08c;
+  transition-duration: 0.3s;
+}
+a:hover {
+  text-decoration: underline;
+  color: #f16529 !important;
+}
 
 // .g-boundary {
 //   max-width: 1606px;

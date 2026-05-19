@@ -10,11 +10,11 @@ export const useGlobalStore = defineStore('site-global', () => {
   const user: Ref<undefined | User> = ref(undefined);
 
   async function fetchOptions() {
-    options.value = await $fetch('/api/options/get');
+    options.value = await $fetch('/api/site/options/get');
   }
 
   async function fetchCategoryList() {
-    categoryList.value = await $fetch('/api/category/list');
+    categoryList.value = await $fetch('/api/site/category/list');
   }
 
   async function setCurrentCategoryId(id: number) {

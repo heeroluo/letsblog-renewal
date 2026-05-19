@@ -1,10 +1,7 @@
 <template>
   <div class="g-container">
     <div class="g-boundary g-container__boundary">
-      <main
-        v-if="category"
-        class="p-article-list"
-      >
+      <main class="p-article-list">
         <template v-if="articleList && articleList.rows.length > 0">
           <article
             v-for="article in articleList.rows"
@@ -29,11 +26,14 @@
             v-if="articleList.pageCount > 1"
             :page-count="articleList.pageCount"
             :current-page="articleList.page"
-            :href-template="`${category.href}?page={{page}}`"
+            :href-template="`${category?.href || '/'}?page={{page}}`"
           />
         </template>
       </main>
-      <aside></aside>
+      <site-sidebar>
+        <recommended-article-list />
+        <link-exchange />
+      </site-sidebar>
     </div>
   </div>
 </template>
@@ -41,6 +41,8 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { useGlobalStore } from '~/stores/site/global';
+import RecommendedArticleList from '~/components/site/sidebar/recommended-article-list.server.vue';
+import LinkExchange from '~/components/site/sidebar/link-exchange.server.vue';
 // import type { DataList } from '#shared/types/data';
 // import type { CategoryAttrs } from '#server/repositories/category.repo';
 // import type { ArticleAttrs } from '#server/repositories/article.repo';
@@ -50,30 +52,42 @@ definePageMeta({
 });
 
 const route = useRoute();
-const queryId = Number(route.params.id);
-const queryPage = Number(route.query.page) || 1;
+const queryId = computed(() => Number(route.params.id));
+const queryPage = computed(() => Number(route.query.page) || 1);
 
-const { data } = await useAsyncData(`article-list-${queryId}`, async () => {
-  const requests = await Promise.all([
-    useFetch('/api/category/detail', {
-      query: { categoryId: queryId },
-    }),
-
-    useFetch('/api/article/list', {
-      query: {
-        categoryId: queryId,
-        page: queryPage,
-      },
-    }),
-  ]);
-
-  return {
-    category: requests[0].data.value,
-    articleList: requests[1].data.value,
-  };
+watch([queryId, queryPage], () => {
+  window.scrollTo(0, 0);
 });
 
+const { data } = await useAsyncData(
+  computed(() => `article-list-${queryId.value}-${queryPage.value}`),
+  async () => {
+    const requests = await Promise.all([
+      queryId.value
+        ? useFetch('/api/site/category/detail', {
+            query: { categoryId: queryId.value },
+          })
+        : Promise.resolve({ data: { value: null } }),
+
+      useFetch('/api/site/article/list', {
+        query: {
+          categoryId: queryId.value ? queryId.value : undefined,
+          page: queryPage.value,
+        },
+      }),
+    ]);
+
+    return {
+      category: requests[0].data.value,
+      articleList: requests[1].data.value,
+    };
+  },
+);
+
 const category = computed(() => data.value?.category);
+useSeoMeta({
+  title: category.value ? category.value.categoryName : '首页',
+});
 
 const articleList = computed(() => data.value?.articleList);
 
@@ -82,6 +96,8 @@ onMounted(() => {
     const { setCurrentCategoryId } = useGlobalStore();
     if (value) {
       setCurrentCategoryId(value.categoryId as number);
+    } else {
+      setCurrentCategoryId(0);
     }
   }, {
     immediate: true,

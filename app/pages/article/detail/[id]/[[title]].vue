@@ -35,7 +35,7 @@ const route = useRoute();
 const queryId = Number(route.params.id);
 
 const { data: article } = await useAsyncData(`article-${queryId}`, async () => {
-  const res = await useFetch('/api/article/detail', {
+  const res = await useFetch('/api/site/article/detail', {
     query: {
       articleId: queryId,
     },
