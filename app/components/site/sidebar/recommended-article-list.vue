@@ -17,8 +17,10 @@
 </template>
 
 <script lang="ts" setup>
+import { SITE_RECOMMENDED_ARTICLE_LIST } from '#shared/async-data-keys/site';
+
 const { data } = await useAsyncData(
-  'recommended-article-list',
+  SITE_RECOMMENDED_ARTICLE_LIST,
   async () => {
     const { data } = await useFetch('/api/site/article/recommended');
     return data.value;

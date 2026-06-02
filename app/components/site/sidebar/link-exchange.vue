@@ -22,8 +22,10 @@
 </template>
 
 <script lang="ts" setup>
+import { SITE_LINK_EXCHANGE } from '#shared/async-data-keys/site';
+
 const { data } = await useAsyncData(
-  'site-link-exchange',
+  SITE_LINK_EXCHANGE,
   async () => {
     const { data } = await useFetch('/api/site/link/list');
     return data.value;

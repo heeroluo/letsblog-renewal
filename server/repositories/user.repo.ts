@@ -168,7 +168,7 @@ export async function findOneByUserId(id: number) {
 /**
  * 根据用户名、密码查询单条用户记录。
  * @param username 用户名。
- * @param password 密码。如果为空，则只根据用户名查询。
+ * @param password 密码。如果为 false，则只根据用户名查询。
  * @returns 用户记录。
  */
 export async function findOneByUsername(username: string, password: string | false) {

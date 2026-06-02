@@ -1,9 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: [
-    '@pinia/nuxt',
-    '@nuxt/eslint',
-  ],
+  modules: ['@pinia/nuxt', '@nuxt/eslint', 'nuxt-auth-utils'],
   devtools: {
     enabled: true,
   },
@@ -13,6 +10,16 @@ export default defineNuxtConfig({
     '@/assets/styles/iconfont/iconfont.css',
     '@/assets/styles/article.scss',
   ],
+  runtimeConfig: {
+    session: {
+      maxAge: 60 * 60,
+      password: process.env.NUXT_SESSION_PASSWORD || '',
+      cookie: {
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+      },
+    },
+  },
   devServer: {
     port: 3030,
   },

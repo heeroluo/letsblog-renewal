@@ -29,16 +29,15 @@
 
 <script setup lang="ts">
 import { useGlobalStore } from '~/stores/site/global';
+import { SITE_FOOTER } from '#shared/async-data-keys/site';
 
 const { options, categoryList } = useGlobalStore();
 
-const { data } = useAsyncData(async () => {
+const { data } = useAsyncData(SITE_FOOTER, async () => {
+  const { data } = await useFetch('/api/server-time');
   return {
-    currentYear: (new Date()).getFullYear(),
+    currentYear: data.value?.currentYear,
   };
-}, {
-  server: true,
-  lazy: false,
 });
 </script>
 
@@ -49,6 +48,10 @@ const { data } = useAsyncData(async () => {
   font-size: 12px;
   line-height: 1.6;
   color: #fafafa;
+
+  a, a:hover {
+    color: #fff !important;
+  }
 }
 .g-footer__boundary {
   @media (min-width: 960px) {

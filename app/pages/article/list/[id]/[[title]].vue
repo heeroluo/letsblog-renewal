@@ -31,8 +31,8 @@
         </template>
       </main>
       <site-sidebar>
-        <recommended-article-list />
-        <link-exchange />
+        <nuxt-island name="SiteRecommendedArticleList" />
+        <nuxt-island name="SiteLinkExchange" />
       </site-sidebar>
     </div>
   </div>
@@ -41,8 +41,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { useGlobalStore } from '~/stores/site/global';
-import RecommendedArticleList from '~/components/site/sidebar/recommended-article-list.server.vue';
-import LinkExchange from '~/components/site/sidebar/link-exchange.server.vue';
 // import type { DataList } from '#shared/types/data';
 // import type { CategoryAttrs } from '#server/repositories/category.repo';
 // import type { ArticleAttrs } from '#server/repositories/article.repo';

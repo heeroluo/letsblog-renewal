@@ -24,7 +24,7 @@ export type UserCreationAttrs = InferCreationAttributes<User>;
 /**
  * 更新用户个人资料的属性。
  */
-export type UserPofileUpdatingAttrs = Pick<UserAttrs, 'groupId' | 'nickname' | 'email'>;
+export type UserProfileUpdatingAttrs = Pick<UserAttrs, 'groupId' | 'nickname' | 'email'>;
 
 /**
  * 用户模型。

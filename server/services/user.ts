@@ -23,9 +23,11 @@ import {
   findOneByUserId as findOneRecordByUserId,
   findOneByUsername as findOneRecordByUsername,
   findOneByNames as findOneRecordByNames,
-  type UserCreationAttrs,
-  type UserPofileUpdatingAttrs,
 } from '#server/repositories/user.repo';
+import type {
+  UserCreationAttrs,
+  UserProfileUpdatingAttrs,
+} from '#server/models/user.model';
 
 // 通过 SHA1 算法加密
 function encryptPassword(password: string) {
@@ -58,7 +60,7 @@ export async function create(data: UserCreationAttrs) {
  * @param userId 用户编号。
  */
 export async function updateProfile(
-  user: UserPofileUpdatingAttrs,
+  user: UserProfileUpdatingAttrs,
   userId: number,
 ) {
   validateIdAndThrow(userId, INVALID_ID_MSG);

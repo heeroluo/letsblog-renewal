@@ -10,8 +10,8 @@ import {
   destroy as destroyLinkRecord,
   findAll as findAllLinksRecord,
   findOne as findOneLinkRecord,
-  type LinkCreationAttrs,
 } from '#server/repositories/link.repo';
+import type { LinkCreationAttrs } from '#server/models/link.model';
 
 /**
  * 创建链接。
